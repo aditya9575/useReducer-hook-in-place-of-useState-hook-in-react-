@@ -1,0 +1,50 @@
+// import React, { useState } from 'react'
+
+// const Counter = () => {
+
+// const [count,setCount] = useState("0");
+
+//   return (
+//     <div>
+//         {count};
+//         <button onClick={()=>setCount(count+1)}>Inc</button>
+//         <button onClick={()=>setCount(count-1)}>Dec</button>
+//     </div>
+//   )
+// }
+
+// export default Counter;
+
+//-----------------------------------------------------------------------------------------------------------------------------------//  ↑useState↑
+//-----------------------------------------------------------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------------------------------------------//  ↓useReducer↓
+
+
+import React, { useReducer } from "react";
+
+const initialState = "0";
+
+const myReducerFunction = (state, action) => {
+  if (action.type === "Increment") {
+    return state + 1;
+  }
+  if (action.type === "Decrement") {
+    return state - 1;
+  }
+  return state;
+};
+
+const Counter = () => {
+  //The reducer function takes in two arguments ->(i)The reducer function , (ii)your initial state
+  const [state, dispatch] = useReducer(myReducerFunction, initialState);
+
+  return (
+    <>
+      {state};
+      <button onClick={() => dispatch({ type: "Increment" })}>Inc</button>
+      <button onClick={() => dispatch({ type: "Decrement" })}>Dec</button>
+    </>
+  );
+};
+
+export default Counter;
